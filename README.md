@@ -4,11 +4,14 @@
 
 
 ### Introduction
----
+
+-------------
 
 ### Versions
 
----
+---------------
+
+
 
 ### Compatibility
 
@@ -18,7 +21,8 @@ Memory requirements: The memory required for the Artemis1 SDK depends on image s
 
 Additional libraries required for each particular deployment will be provided by algocian.
 
----
+---------------
+
 
 ### What is included in the SDK
 
