@@ -6,18 +6,28 @@
 
 ![enter image description here](http://blog.cobia.net/cobiacomm/wp-content/uploads/2014/06/api-512x270.png)
 
+![enter image description here](http://alg11.api.algocian.com/api1.png)
 
  
 
->  <b>SetInputFormat(int `width`, int `height`, int `format`)</b>
+## ![enter image description here](http://alg11.api.algocian.com/api1.png) </b>
+
+#### ⚙ <b>setInputFormat(int `width`, int `height`, int `format`) </b>
 
 
-The following parameters are used:
+	
+Specify input size in pixels and format of raw input. The raw input image format can be:
+
+- The following are accepted input formats:
+ -  `IMG_FORMAT_RGB24`: RGB, 3 bytes per pixel, i.e. RGBRGBRGB.
+ -  `IMG_FORMAT_YUV24`: YUV 3 bytes per pixel, i.e. YUVYUVYUV.
+
 
 | Parameter | Description |
-| :---: | --- |
-| width | Width of the image |
-| height | Height of the image |
+| :---:     | --- |
+| width | Width of the image in pixels. |
+| height | Height of the image in pixels. |
+| format | One of the following: ALGOCIAN_RGB24, ALGOCIAN_YUV24, ALGOCIAN_IPLIMAGE |
 
 
      sdfsdfds
