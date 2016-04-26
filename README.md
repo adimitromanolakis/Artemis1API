@@ -13,11 +13,10 @@
 
 
 The following parameters are used:
-
-| Image | OK |
-| --- | --- |
-| `width` | Width of the image |
-| `height` | Height of the image |
+| Parameter | Description |
+| :---: | --- |
+| width | Width of the image |
+| height | Height of the image |
 
 
      sdfsdfds
