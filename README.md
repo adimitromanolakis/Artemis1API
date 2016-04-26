@@ -9,10 +9,11 @@
 
  
 
->  <code>SetInputFormat(int `width`, int `height`, int format)</code>
+>  <b>SetInputFormat(int `width`, int `height`, int `format`)</b>
 
 
 The following parameters are used:
+
 | Parameter | Description |
 | :---: | --- |
 | width | Width of the image |
