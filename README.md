@@ -1,22 +1,32 @@
-# API
 
-## QuickStart
+# <b> API </b>
 
 
-```c++
-x.SetInputFormat(int width, int height, int format)
-```
+## QuickStart 
+
+![enter image description here](http://blog.cobia.net/cobiacomm/wp-content/uploads/2014/06/api-512x270.png)
+
+
+ 
+
+>  <code>SetInputFormat(int `width`, int `height`, int format)</code>
+
 
 The following parameters are used:
 
 | Image | OK |
 | --- | --- |
-| width | Width of the image |
-| height | Height of the image |
+| `width` | Width of the image |
+| `height` | Height of the image |
 
 
-
-
+     sdfsdfds
+    
+$ x*x*x*x \frac{1}{x^2} $
+    
+    
+> sdfsdf
+> 
 
 ```c++
 
@@ -61,4 +71,3 @@ x.saveOutputImage("/tmp/output.jpg");
 
 
 ## GetDetections ##
-
