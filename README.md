@@ -8,16 +8,15 @@
 
 ### v1.12 - March 2015
 
-
-
-
-<img src='http://alg11.api.algocian.com/Artemis1_logo1.png'>
 ![enter image description here](http://alg11.api.algocian.com/Artemis1_logo1s.png) 
 
 
 ## Introduction
 
-The Artemis 1 SDK enables the seamless integration of Artemis 1 person detection solution to x86 and embedded systems. 
+The Artemis 1 SDK enables the integration of advanced machine learning algorithms in x86 and embedded systems. Included in the SDK is the Artemis 1 person detection solution than enables 
+
+The SDK is targeted at security and surveilance system integrators, smart-home camera manufacturers and OEM camera manufacturers.
+ 
 
 
 
@@ -34,18 +33,24 @@ The current version of the SDK includes
 
 ### Compatibility
 
-The current version of the SDK is compatible with Linux systems on armv7, armv8, i386 and amd64 architectures. A standard GLIBC system installation is required. Different versions of the SDK are provided for each architecture.
+Currently the SDK is compatible with Linux systems on armv7, armv8, i386 and amd64 architectures. A standard libc system installation is required. Different versions of the SDK will be provided for each architecture.
 
-Memory requirements: The memory required for the Artemis1 SDK depends on image size and number of cores used, can be as low as 20MB.
+In the case of embedded systems, additional system libraries might be required depending on the deployment. If necessary, these libraries can be provided by Algocian.
 
-Additional libraries required for each particular deployment will be provided by algocian.
+
+#### Memory requirements
+
+The memory required for the Artemis1 SDK depends on image size and number of cores that will be used.  Under a typical deployment scenario at 640x480, memory requirements will be approximately 30MB.
+
 
 ---------------
 
 
-### What is inside the SDK
+### What is inside
 
-| Parameter | Description |
+The following directory structure is followed in all our versions of the SDK. In a typical scenario only the .so file will be required to be deployed.
+
+| Location | Description |
 | :---     | --- |
 | include/artemis1.h | C++ header file that provided access to the SDK |
 | lib/libartemis1.so | Library to use at link time |
@@ -59,24 +64,77 @@ Additional libraries required for each particular deployment will be provided by
 
 ### Examples included
 
-> sdfsdf
+
+> examples/process_video.sh
 > 
+
+Processes a video file and generates a series of output images with results. Metadata will be included in standard output.
+
+> examples/process_rgb24.sh
+ 
+Processes a raw frame of size 640x480 from standard input. An output jpeg file will be generated.
+
+
+
 
 ------------
 ### Models
 
-A 'model` is a type of object that will be detected by artemis1 within an image or video frame. For example, if you are using the PERSON_UPRIGHT model, a person entering the frame will be detected but cars, pets and other objects will not.
+A 'model` is the type of object that will be detected by Artemis1. For example, if you are using the PERSON_UPRIGHT model, a person entering the frame will be detected but cars, pets and other objects will not.
 
 Currently artemis1 supports the PERSON_UPRIGHT model which detect persons in a image/video frame. Additional models will be included in the future, for example <i>PETS_GENERIC</i> will be able to detect pets and exclude humans.
 
 The PERSON_UPRIGHT_12_GENERIC model currently included in the SDK indicates the following:
-1) It is a model to detect persons
-2) Version number of model is 12
-3) It is a generic model, means it was not optimized for any particular camera or situation
+* It is a model to detect persons.
+* Version number of model is 12.
+* It is a generic model, means it was not optimized for any particular camera or situation.
 
 
 
 ### QuickStart 
+
+```c++
+
+#include <artemis1.h>
+
+using namespace algocian;
+
+
+void
+detectPeople()
+{
+    Artemis1Detector *detector;
+
+    detector = new Artemis1Detector();
+    
+    detector->setModel(PERSON_UPRIGHT_12);
+    detector->setInputFormat(640, 480, FMT_RGB24);
+
+
+    while(1) {
+
+        detectionsList persons;		
+		char *image_data;
+	
+		image_data = grabCameraInputRGB();
+
+        persons = x.detect(image_data);
+
+		if(persons.size() > 0) {  
+        
+            printf("Alert! Person Detected");
+            
+            x.saveOutputImage("/tmp/output.jpg");
+
+			alertUser("Person Detected", "/tmp/output.jpg");
+        }
+		
+	}
+	
+
+
+
+```
 
     
 
@@ -85,14 +143,14 @@ The PERSON_UPRIGHT_12_GENERIC model currently included in the SDK indicates the 
 
 using namespace algocian;
 
-Artemis1Detector *detector;
 
 void
 detectPeople()
 {
     detector = new Artemis1Detector(PERSON_UPRIGHT_12_GENERIC, 0.1, 0.9, 640, 480, algocian::FMT_RGB24);
     
-    
+    Artemis1Detector *detector;
+
 
     detector = new Artemis1Detector();
 
