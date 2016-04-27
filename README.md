@@ -41,6 +41,7 @@ The SDK is targeted at security and surveilance system integrators, smart-home c
 #### Versions
 
 The following versions are supported:
+
 | Platform | Architecture | Type | Support |  
 | :---: | :---: | :---: | :---: |
 | PC | i386 | 32-bit | Limited support |
@@ -323,6 +324,7 @@ The following are accepted input formats:
      fdsfsd
          
 ```
+
 
 
 
