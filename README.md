@@ -1,4 +1,4 @@
-
+ 
 
 ![enter image description here](http://rhodes2.api.algocian.com/client/algocian-logo.png)
 
@@ -66,22 +66,27 @@ In the case of embedded systems, additional system libraries might be required d
 
 #### Memory requirements
 
-The memory required for the Artemis1 SDK depends on image size and number of cores that will be used.  Under a typical deployment scenario at 640x480, memory requirements will be approximately 30MB.
+The memory required  for processing video/image feeds depends on image size and number of  processor cores that will be used.  Under a typical deployment scenario at 640x480, memory requirements will be approximately 30MB.
 
 #### Disk space requirements
 
-Artemis1 does not use any intermediate files. The disk space required for the libartemis1  library and required third-party libraries is 5-15MB depending on architecture.
+Artemis1 does not use any intermediate temporary files. The disk space required for the libartemis1  library and required third-party libraries will be 5-15MB depending on architecture.
 
+#### External library requirements
 
+Processing raw frames with the Algocian API, in a deployment scenario, does not require any external libraries except libstdc++.so.6, libpthread.so.
 
 ### Embedded system CPU usage management
 
-libartemis1 provides the means to manage the CPU requirements when on a limited enviroment. 
+libartemis1 provides the means to manage the CPU requirements when on a limited enviroment.  The default running mode is single-threaded.  When running on 2 or more cores, artemis1 will provide 
+
+#### Running as a separate process
+
+libartemis1 is not tied to any particular means of video input / output. Running artemis1 as a standalone process is an option, where video frames are communicated across a pipe or shared memory. You can look at the example process_rgb24 for details on how to communicate video frames across different processes,
 
 
-### Getting better accuracy out of artemis1
 
-
+ 
 
 
 
@@ -114,16 +119,22 @@ Processes a video file and generates a series of output images with results. Met
 
 > examples/process_rgb24.sh
  
-Processes raw RGB24 frames of size 640x480 from standard input. An output jpeg file will be generated. The data can be fed from a webcam using the following command:
+Processes raw RGB24 frames of size 640x480 from standard input. Output jpeg files can be generated or just metadata. The data can be fed from a webcam using the following command:
 
-`ffmpeg -s 640x480 -f v4l2 -i /dev/video2 -f rawvideo -pix_fmt bgr24 - | sh examples/process_rgb24.sh`
-
-
+<b> ffmpeg -s 640x480 -f v4l2 -i /dev/video2 -f rawvideo -pix_fmt bgr24 - | sh examples/process_rgb24.sh 640 480 0 </b>
 
 
-
+<br>
 
 ------------
+
+
+## Getting better accuracy out of artemis1
+
+
+
+
+
 ### Models
 
 A 'model` is the type of object that will be detected by Artemis1. For example, if you are using the PERSON_UPRIGHT model, a person entering the frame will be detected but cars, pets and other objects will not.
@@ -285,12 +296,19 @@ In case of compilation problems, we can provide prebuilt static libraries if nec
 ![enter image description here](http://alg11.api.algocian.com/api1.png)
 
 ### API Reference 
+> <b> detect(char *image_data) </b> (void)
+
+> <b> detect_region(char *image_data, int x1,int y1, int x2, int y2) </b> (void)
+> <b> update_background(char *image_data, int x1,int y1, int x2, int y2) </b> (void)
+
+ > <b> save_output_image(char *file_name)  </b> (void)
+
+ > <b> set_detection_heights </b> (float percent_lower_height, float percent_max_height)  </b>   ⇨ (void)
 
 
 
- 
-> <b> setModel(int `model_type`) </b> (void)
->
+> <b> set_model(int `model_type`) </b> (void)
+
 > Specify which objects the detector will detect. 
 
 The following models are supported currently:
@@ -299,7 +317,7 @@ The following models are supported currently:
 
 Future releases will include additional models and tuning of models to specific cameras. Possible scenarios are PET_GENERIC, CAR_GENERIC etc..
 
->  <b>setInputFormat(int `width`, int `height`, int `format`) </b>  ⇨ void
+>  <b>set_input_format(int `width`, int `height`, int `format`) </b>  ⇨ void
 >
 >   Specify input image size in pixels and format of raw input pixels. 
 
