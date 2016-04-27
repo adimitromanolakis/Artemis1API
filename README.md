@@ -47,6 +47,18 @@ In the case of embedded systems, additional system libraries might be required d
 The memory required for the Artemis1 SDK depends on image size and number of cores that will be used.  Under a typical deployment scenario at 640x480, memory requirements will be approximately 30MB.
 
 
+#### Embedded system CPU usage management
+
+
+
+
+
+#### Getting better accuracy out of artemis1
+
+
+
+
+
 ---------------
 
 
@@ -76,7 +88,11 @@ Processes a video file and generates a series of output images with results. Met
 
 > examples/process_rgb24.sh
  
-Processes a raw frame of size 640x480 from standard input. An output jpeg file will be generated.
+Processes raw RGB24 frames of size 640x480 from standard input. An output jpeg file will be generated. The data can be fed from a webcam using the following command:
+
+`ffmpeg -s 640x480 -f v4l2 -i /dev/video2 -f rawvideo -pix_fmt bgr24 - | sh examples/process_rgb24.sh`
+
+
 
 
 
