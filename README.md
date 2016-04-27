@@ -40,7 +40,17 @@ The SDK is targeted at security and surveilance system integrators, smart-home c
 
 #### Versions
 
-The current version of the SDK includes 
+The following versions are supported:
+| Platform | Architecture | Type | Support |  
+| :---: | :---: | :---: | :---: |
+| PC | i386 | 32-bit | Limited support |
+| PC | amd64 | 64-bit | Fully supported |
+| ARM | armv7 | 32-bit | Fully supported |
+| ARM| AArch64 | 64-bit | Fully supported |
+
+
+
+The current version of the SDK includes specific versions for amd64, armv7 and armv8 systems.
 
 ---------------
 
@@ -57,14 +67,18 @@ In the case of embedded systems, additional system libraries might be required d
 
 The memory required for the Artemis1 SDK depends on image size and number of cores that will be used.  Under a typical deployment scenario at 640x480, memory requirements will be approximately 30MB.
 
+#### Disk space requirements
 
-#### Embedded system CPU usage management
-
-
-
+Artemis1 does not use any intermediate files. The disk space required for the libartemis1  library and required third-party libraries is 5-15MB depending on architecture.
 
 
-#### Getting better accuracy out of artemis1
+
+### Embedded system CPU usage management
+
+libartemis1 provides the means to manage the CPU requirements when on a limited enviroment. 
+
+
+### Getting better accuracy out of artemis1
 
 
 
@@ -119,6 +133,11 @@ The PERSON_UPRIGHT_12_GENERIC model currently included in the SDK indicates the 
 * It is a model to detect persons.
 * Version number of model is 12.
 * It is a generic model, means it was not optimized for any particular camera or situation.
+
+### Generating optimal models for you camera
+
+Given a particular camera and scenario, a targeted model can be generated from our database.
+
 
 
 
