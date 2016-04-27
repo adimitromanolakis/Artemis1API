@@ -1,4 +1,4 @@
- 
+
 
 ![enter image description here](http://rhodes2.api.algocian.com/client/algocian-logo.png)
 
@@ -16,14 +16,19 @@ https://stackedit.io/editor#
 
 # Artemis1 SDK Documentation 
 
-### v1.12 - March 2015
+v1.12 - March 2015
 
 ![enter image description here](http://alg11.api.algocian.com/Artemis1_logo1s.png) 
+
+
 
 
 ## Table of contents
 
 [TOC]
+
+
+
 
 
 ## Introduction
@@ -155,19 +160,23 @@ Given a particular camera and scenario, a targeted model can be generated from o
 
 ### QuickStart 
 
+
+
+The following examples illlustrate a simple usage scenario:
+
+
 ```c++
 
 #include <artemis1.h>
 
 using namespace algocian;
 
+artemis1Detector *detector;
 
 void
 detectPeople()
 {
-    Artemis1Detector *detector;
-
-    detector = new Artemis1Detector();
+    detector = new artemis1Detector();
     
     detector->setModel(PERSON_UPRIGHT_12);
     detector->setInputFormat(640, 480, FMT_RGB24);
@@ -192,11 +201,17 @@ detectPeople()
         }
 		
 	}
-	
-
 
 
 ```
+
+
+
+
+
+
+
+
 
     
 
@@ -324,13 +339,14 @@ Future releases will include additional models and tuning of models to specific 
 The following are accepted input formats:
 
 -  `IMG_FORMAT_RGB24`: RGB, 3 bytes per pixel, i.e. RGBRGBRGB. 
+-  `IMG_FORMAT_BGR24`: RGB, 3 bytes per pixel, i.e. BGRBGRBGR. 
 -  `IMG_FORMAT_YUV24`: YUV 3 bytes per pixel, i.e. YUVYUVYUV.
 
 | Parameter | Description |
 | :---      | ---         |
 | width  | Width of the image in pixels. |
 | height | Height of the image in pixels. |
-| format | One of the following: IMG_FORMAT_RGB24, IMG_FORMAT_YUV24, IMG_FORMAT_IPLIMAGE |
+| format | Image format of incoming video frame. |
 
 
 
