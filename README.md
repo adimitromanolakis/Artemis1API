@@ -1,21 +1,32 @@
+----------
 
 
+
+![enter image description here](http://rhodes2.api.algocian.com/client/algocian-logo.png)
+
+# Artemis1 SDK Documentation 
+
+### v1.12 - March 2015
+
+
+
+
+<img src='http://alg11.api.algocian.com/Artemis1_logo1.png'>
 ![enter image description here](http://alg11.api.algocian.com/Artemis1_logo1s.png) 
 
 
+## Introduction
 
-# Algocian SDK Documentation v1.12
-
-<img src='http://alg11.api.algocian.com/Artemis1_logo1.png'>
-
-## March 2015
+The Artemis 1 SDK enables the seamless integration of Artemis 1 person detection solution to x86 and embedded systems. 
 
 
-### Introduction
+
 
 -------------
 
-### Versions
+#### Versions
+
+The current version of the SDK includes 
 
 ---------------
 
@@ -32,13 +43,13 @@ Additional libraries required for each particular deployment will be provided by
 ---------------
 
 
-### What is included in the SDK
+### What is inside the SDK
 
 | Parameter | Description |
 | :---     | --- |
 | include/artemis1.h | C++ header file that provided access to the SDK |
 | lib/libartemis1.so | Library to use at link time |
-| support/ | additional libraries that might be required in the deployment system |
+| support/ | additional libraries that might be required in a deployment system |
 | examples/ | showcase of Artemis1 with code examples |
 | artemis1-sdk.pdf | Documentation for using the SDK |
 
@@ -52,6 +63,18 @@ Additional libraries required for each particular deployment will be provided by
 > 
 
 ------------
+### Models
+
+A 'model` is a type of object that will be detected by artemis1 within an image or video frame. For example, if you are using the PERSON_UPRIGHT model, a person entering the frame will be detected but cars, pets and other objects will not.
+
+Currently artemis1 supports the PERSON_UPRIGHT model which detect persons in a image/video frame. Additional models will be included in the future, for example <i>PETS_GENERIC</i> will be able to detect pets and exclude humans.
+
+The PERSON_UPRIGHT_12_GENERIC model currently included in the SDK indicates the following:
+1) It is a model to detect persons
+2) Version number of model is 12
+3) It is a generic model, means it was not optimized for any particular camera or situation
+
+
 
 ### QuickStart 
 
@@ -67,7 +90,7 @@ Artemis1Detector *detector;
 void
 detectPeople()
 {
-    detector = new Artemis1Detector(PERSON_UPRIGHT_12, 0.1, 0.9, 640, 480, algocian::FMT_RGB24);
+    detector = new Artemis1Detector(PERSON_UPRIGHT_12_GENERIC, 0.1, 0.9, 640, 480, algocian::FMT_RGB24);
     
     
 
@@ -185,6 +208,7 @@ The following are accepted input formats:
 
 
 
+## Garbage ##
 
 
      sdfsdfds
@@ -193,5 +217,4 @@ The following are accepted input formats:
 ```
 
 
-## GetDetections ##
 
