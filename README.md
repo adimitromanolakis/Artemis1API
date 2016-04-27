@@ -1,5 +1,13 @@
 
+
+![enter image description here](http://alg11.api.algocian.com/Artemis1_logo1s.png) 
+
+
+
 # Algocian SDK Documentation v1.12
+
+<img src='http://alg11.api.algocian.com/Artemis1_logo1.png'>
+
 ## March 2015
 
 
@@ -50,7 +58,6 @@ Additional libraries required for each particular deployment will be provided by
     
 
 ```c++
-
 #include <artemis1.h>
 
 using namespace algocian;
@@ -58,44 +65,66 @@ using namespace algocian;
 Artemis1Detector *detector;
 
 void
-detectPeople() 
+detectPeople()
 {
-	
-	detector = new Artemis1Detector();
-	
-	// Select the default person detection model
-	detector.setModel(PERSON_UPRIGHT_12); 
-	
-	// Detect a person from 10% to 90% height of the image
-	detector.setDetectionHeights(0.1,0.9); 
-	
-	// Set the input format as RGB 24 bits per pixel
-	detector.setInputFormat(640,480,algocian::FMT_RGB24);
+    detector = new Artemis1Detector(PERSON_UPRIGHT_12, 0.1, 0.9, 640, 480, algocian::FMT_RGB24);
+    
+    
+
+    detector = new Artemis1Detector();
+
+    // Select the default person detection model
+    
+    detector.setModel(PERSON_UPRIGHT_12);
+
+    // Detect a person from 10% to 90% height of the image
+    
+    detector.setDetectionHeights(0.1,0.9);
+
+    // Set the input format as RGB 24 bits per pixel
+    
+    detector.setInputFormat(640,480,algocian::FMT_RGB24);
 
 
-	detector.setInputFormat(640,480,algocian::FMT_YUV24)
-	detector.setInputFormat(640,480,algocian::FMT_IPLIMAGE)
-	
-	
-	
-	
-	while(1) {
-	
-		detectionsList persons;
-		
-		persons = x.detect(char *data);
-		persons = x.detect(IplImage *input_image);
-		
-		
-		if(persons.size() > 0) { 
-		  printf("Alert! Person Detected");
-		  printf("  at location %d %d", );
-		  
-		}
-		
-		x.saveOutputImage("/tmp/output.jpg");
-		
-	}
+    // Set the input format as RGB 24 bits per pixel
+    
+    detector.setSensitivity(10);
+   
+    
+    detector.setInputFormat(640,480,algocian::FMT_YUV24)
+
+    detector.setInputFormat(640,480,algocian::FMT_IPLIMAGE)
+
+
+
+    while(1) {
+
+        detectionsList persons;
+
+        persons = x.detect(image_data);
+
+        persons = x.detect(image_data, x1, y1, x2, y2);
+        
+        
+        x.updateBackground(image_data);
+        
+        
+        persons = x.detect(IplImage *input_image);
+
+
+        if(persons.size() > 0) {
+          
+            printf("Alert! Person Detected");
+          
+          
+          
+            printf("  at location %d %d", );
+
+        }
+
+        x.saveOutputImage("/tmp/output.jpg");
+
+    }
 
 }
 
@@ -160,11 +189,9 @@ The following are accepted input formats:
 
      sdfsdfds
      fdsfsd
-     
-$ x*x*x*x \frac{1}{x^2} $
-    
-
+         
 ```
 
 
 ## GetDetections ##
+
