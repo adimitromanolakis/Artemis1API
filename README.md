@@ -78,7 +78,7 @@ Artemis1 does not use any intermediate temporary files. The disk space required 
 
 Processing raw frames with the Algocian API, in a deployment scenario, does not require any external system libraries except libstdc++.so.6, libpthread.so.
 
-### Embedded system CPU usage management
+#### Embedded system CPU usage management
 
 libartemis1 provides the means to manage the CPU requirements when on a limited enviroment.  The default running mode is single-threaded.  When running on 2 or more cores, artemis1  provides the API interfaces to start and manage the threads.
 
@@ -118,6 +118,7 @@ The following directory structure is followed in all our versions of the SDK. In
 > 
 
 Processes a video file and generates a series of output images with results. Metadata will be included in standard output. This examples requires the SDK to link with ffmpeg libraries for video file decoding.
+<br>
 
 > examples/process_rgb24.sh
  
@@ -125,6 +126,11 @@ Processes raw RGB24 frames of size 640x480 from standard input. Output jpeg file
 
 <b> ffmpeg -s 640x480 -f v4l2 -i /dev/video2 -f rawvideo -pix_fmt bgr24 - | sh examples/process_rgb24.sh 640 480 0 </b>
 
+<br>
+> examples/process_multicore.sh
+ 
+ Showcases multi-core processing and managing of CPU usage, using raw RGB24 frames from standard input .
+ 
 
 <br>
 
@@ -157,10 +163,9 @@ In addition, models capturing other scenarios can be developed, like a car model
 Our team will evaluate the requirements and time frame to generate such models.
 
 
-### 
 
 
-### QuickStart 
+## QuickStart 
 
 
 
@@ -363,14 +368,6 @@ The following are accepted input formats:
 | height | Height of the image in pixels. |
 | format | Image format of incoming video frame. |
 
-
-
-
-## Garbage ##
-
-
-     sdfsdfds
-     fdsfsd
          
 ```
 
