@@ -33,19 +33,16 @@ v1.12 - March 2015
 
 ## Introduction
 
-The Artemis 1 SDK enables the integration of advanced machine learning algorithms in x86 and embedded systems. Included in the SDK is the Artemis 1 person detection solution than enables 
+The Artemis 1 SDK enables the integration of advanced machine learning algorithms for object detection in x86 and embedded systems. Included in the SDK is the Artemis 1 person detection solution that enable person detection with low computational footprint. 
 
 The SDK is targeted at security and surveilance system integrators, smart-home camera manufacturers and OEM camera manufacturers.
  
-
-
-
 
 -------------
 
 #### Versions
 
-The following versions are supported:
+The following architectures are supported:
 
 | Platform | Architecture | Type | Support |  
 | :---: | :---: | :---: | :---: |
@@ -79,11 +76,11 @@ Artemis1 does not use any intermediate temporary files. The disk space required 
 
 #### External library requirements
 
-Processing raw frames with the Algocian API, in a deployment scenario, does not require any external libraries except libstdc++.so.6, libpthread.so.
+Processing raw frames with the Algocian API, in a deployment scenario, does not require any external system libraries except libstdc++.so.6, libpthread.so.
 
 ### Embedded system CPU usage management
 
-libartemis1 provides the means to manage the CPU requirements when on a limited enviroment.  The default running mode is single-threaded.  When running on 2 or more cores, artemis1 will provide 
+libartemis1 provides the means to manage the CPU requirements when on a limited enviroment.  The default running mode is single-threaded.  When running on 2 or more cores, artemis1  provides the API interfaces to start and manage the threads.
 
 #### Running as a separate process
 
@@ -120,11 +117,11 @@ The following directory structure is followed in all our versions of the SDK. In
 > examples/process_video.sh
 > 
 
-Processes a video file and generates a series of output images with results. Metadata will be included in standard output.
+Processes a video file and generates a series of output images with results. Metadata will be included in standard output. This examples requires the SDK to link with ffmpeg libraries for video file decoding.
 
 > examples/process_rgb24.sh
  
-Processes raw RGB24 frames of size 640x480 from standard input. Output jpeg files can be generated or just metadata. The data can be fed from a webcam using the following command:
+Processes raw RGB24 frames of size 640x480 from standard input. Output jpeg files can be generated or metadata. The data can be fed from a webcam using the following command:
 
 <b> ffmpeg -s 640x480 -f v4l2 -i /dev/video2 -f rawvideo -pix_fmt bgr24 - | sh examples/process_rgb24.sh 640 480 0 </b>
 
@@ -134,7 +131,7 @@ Processes raw RGB24 frames of size 640x480 from standard input. Output jpeg file
 ------------
 
 
-## Getting better accuracy out of artemis1
+## Fine-tuning artemis1
 
 
 
@@ -153,19 +150,25 @@ The PERSON_UPRIGHT_12_GENERIC model currently included in the SDK indicates the 
 
 ### Generating optimal models for you camera
 
-Given a particular camera and scenario, a targeted model can be generated from our database.
+Given a particular camera and scenario, a targeted model can be generated using input data from that particular camera. The benefits of having a targeted model is increased accuracy across the particular camera/optics combination. 
+
+In addition, models capturing other scenarios can be developed, like a car model or a model in an infrared night-vision camera. 
+
+Our team will evaluate the requirements and time frame to generate such models.
 
 
+### 
 
 
 ### QuickStart 
 
 
 
-The following examples illlustrate a simple usage scenario:
+The following examples illlustrate a simple usage scenario of the artemis1 API, using two fictional functions grabCameraInput and alertUser:
 
 
 ```c++
+
 
 #include <artemis1.h>
 
@@ -177,31 +180,43 @@ void
 detectPeople()
 {
     detector = new artemis1Detector();
-    
+
     detector->setModel(PERSON_UPRIGHT_12);
     detector->setInputFormat(640, 480, FMT_RGB24);
 
 
     while(1) {
 
-        detectionsList persons;		
-		char *image_data;
-	
-		image_data = grabCameraInputRGB();
+        detectionsList persons;
+
+        char *image_data;
+
+        image_data = grabCameraInputRGB();
 
         persons = x.detect(image_data);
 
-		if(persons.size() > 0) {  
-        
+        if(persons.nobjects() > 0) {
+
             printf("Alert! Person Detected");
-            
+
+            printf("  Location: %d,%d\n",
+                    persons.object[0].x1,
+                    persons.object[0].y1);
+
+            printf("  Estimated height: %d\n",
+                   persons.object[0].y2 - persons.objects[0].y1);
+
+
+            );
+
             x.saveOutputImage("/tmp/output.jpg");
 
-			alertUser("Person Detected", "/tmp/output.jpg");
+            alertUser("Person Detected", "/tmp/output.jpg");
         }
-		
-	}
 
+    }
+
+}
 
 ```
 
@@ -358,7 +373,6 @@ The following are accepted input formats:
      fdsfsd
          
 ```
-
 
 
 
