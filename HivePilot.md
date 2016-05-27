@@ -12,9 +12,14 @@ https://stackedit.io/editor#
 
 
 
+# Artemis1 Raspberry PI 3 Demo
+## Description / scope and set-up
 
 
-# Artemis1 SDK Documentation 
+
+
+
+
 
 v1.12 - March 2015
 
@@ -22,7 +27,3 @@ v1.12 - March 2015
 
 
 
-
-## Table of contents
-
-[TOC]
