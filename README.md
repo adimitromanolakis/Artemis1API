@@ -5,15 +5,6 @@ https://stackedit.io/editor#
 
 v1.12 - March 2015
 
-
-## Table of contents
-
-[TOC]
-
-
-
-
-
 ## Introduction
 
 The Artemis 1 SDK enables the integration of advanced machine learning algorithms for object detection in x86 and embedded systems. Included in the SDK is the Artemis 1 person detection solution that enable person detection with low computational footprint. 
